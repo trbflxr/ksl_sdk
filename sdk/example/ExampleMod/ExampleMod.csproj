@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>Example</RootNamespace>
+		<AssemblyName>ExampleMod</AssemblyName>
+		<TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+		<FileAlignment>512</FileAlignment>
+		<LangVersion>9</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>..\build\Debug\</OutputPath>
+		<BaseIntermediateOutputPath>..\build\Debug\obj\</BaseIntermediateOutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>..\build\Release\</OutputPath>
+		<BaseIntermediateOutputPath>..\build\Release\obj\</BaseIntermediateOutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_Encrypted|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>..\build\Release_Encrypted\</OutputPath>
+		<BaseIntermediateOutputPath>..\build\Release_Encrypted\obj\</BaseIntermediateOutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+        <!--Keep in mind that the maykr key and game paths are placeholders and you HAVE to replace it by your key and game paths in order to work-->
+        <!--Read how to get maykr key here: https://github.com/trbflxr/ksl/blob/master/doc/guide/dev/developer_rights.md-->
+        <PostBuildEvent>$(SolutionDir)../maykr.exe "$(SolutionDir)build/$(Configuration)/ExampleMod.dll" -c "$(SolutionDir)/ExampleMod_maykr.kmc" -o "G:/SteamLibrary/steamapps/common/CarX Drift Racing Online/kino/mods" -np</PostBuildEvent>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="KSL.API">
+			<HintPath>..\..\API\KSL.API.dll</HintPath>
+		</Reference>
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Xml" />
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>..\dependencies\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="Config.cs" />
+		<Compile Include="CustomTypeExample.cs" />
+		<Compile Include="ExampleMod.cs" />
+		<Compile Include="PrefsWrapperAdvanced.cs" />
+		<Compile Include="PrefsWrapperSimple.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="UIExample.cs" />
+		<Compile Include="PrefsStorageExample.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\icon.png" />
+	</ItemGroup>
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

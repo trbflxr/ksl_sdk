@@ -1,0 +1,12 @@
+.vs
+.idea
+.vscode
+
+*.csproj.user
+*.user
+
+# managed
+sdk/example/build
+
+#osx
+.DS_Store

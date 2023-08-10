@@ -1,0 +1,900 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KSL.API</name>
+    </assembly>
+    <members>
+        <member name="T:KSL.API.BaseExtension">
+            <summary>
+            This is a base class for KSL extensions. All extensions should be inherited from it.
+            </summary>
+        </member>
+        <member name="P:KSL.API.BaseExtension.Location">
+            <summary>
+            Location of the extension file
+            </summary>
+        </member>
+        <member name="P:KSL.API.BaseExtension.Meta">
+            <summary>
+            KSL Extension metadata
+            </summary>
+        </member>
+        <member name="P:KSL.API.BaseExtension.Behaviour">
+            <summary>
+            MonoBehaviour parent object of the extension
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnStart">
+            <summary>
+            This is an "initialization" method it will be called once on extension init
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnDestroy">
+            <summary>
+            This is an "deinitialization" method it will be called once on extension deinit
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnUpdate">
+            <summary>
+            This method will be called in every game frame, same as a Unity Update event. <a href="https://docs.unity3d.com/Manual/ExecutionOrder.html">Unity execution order</a>
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnLateUpdate">
+            <summary>
+            This method will be called at the end of every game frame, same as a Unity LateUpdate event. <a href="https://docs.unity3d.com/Manual/ExecutionOrder.html">Unity execution order</a>
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnFixedUpdate">
+            <summary>
+            This method will be called in the Unity FixedUpdate. <a href="https://docs.unity3d.com/Manual/ExecutionOrder.html">Unity execution order</a>
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnSceneLoaded(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode)">
+            <summary>
+            This method will be called when Unity scene is loaded
+            </summary>
+            <param name="scene">The scene</param>
+            <param name="mode">Load mode</param>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnSceneChanged(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.Scene)">
+            <summary>
+            This method will be called on Unity scene change
+            </summary>
+            <param name="current">Current scene</param>
+            <param name="next">Next scene</param>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnUIDraw">
+            <summary>
+            Draw all your UI in this method. It will be called if you select the extension in the main menu.
+            You can draw UI using <see cref="T:KSL.API.IUI"/> or using default unity GUI or GUILayout.
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.OnAdditionalAboutUIDraw">
+            <summary>
+            Additional UI for the "About" context. It will be called if you navigate to "About" context of the extension.
+            You can draw UI using <see cref="T:KSL.API.IUI"/> or using default unity GUI or GUILayout.
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseExtension.GetIcon">
+            <summary>
+            Override this method if you want to set custom icon for your extension. See more <see cref="M:KSL.API.IUIProvider.GetIcon"/>
+            More info at <a href="https://github.com/trbflxr/ksl/blob/master/doc/guide/dev/extensions.md#set-extension-icon">KSL documentation</a>
+            </summary>
+            <returns>Custom extension icon</returns>
+        </member>
+        <member name="T:KSL.API.BaseMod">
+            <summary>
+            This is a base class for KSL mods. All mods should be inherited from it.
+            Keep in mind that this class inherits from MonoBehaviour so you can use Unity event methods in it.
+            </summary>
+        </member>
+        <member name="P:KSL.API.BaseMod.Location">
+            <summary>
+            Location of the mod file
+            </summary>
+        </member>
+        <member name="P:KSL.API.BaseMod.Meta">
+            <summary>
+            KSL mod metadata
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseMod.OnUIDraw">
+            <summary>
+            Draw all your UI in this method. It will be called if you select the mod in the main menu.
+            You can draw UI using <see cref="T:KSL.API.IUI"/> or using default unity GUI or GUILayout.
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseMod.OnAdditionalAboutUIDraw">
+            <summary>
+            Additional UI for the "About" context. It will be called if you navigate to "About" context of the mod.
+            You can draw UI using <see cref="T:KSL.API.IUI"/> or using default unity GUI or GUILayout.
+            </summary>
+        </member>
+        <member name="M:KSL.API.BaseMod.GetIcon">
+            <summary>
+            Override this method if you want to set custom icon for your mod. See more <see cref="M:KSL.API.IUIProvider.GetIcon"/>
+            More info at <a href="https://github.com/trbflxr/ksl/blob/master/doc/guide/dev/mods.md#set-mod-icon">KSL documentation</a>
+            </summary>
+            <returns>Custom mod icon</returns>
+        </member>
+        <member name="T:KSL.API.ICallbacks">
+            <summary>
+            KSL callbacks interface
+            </summary>
+        </member>
+        <member name="E:KSL.API.ICallbacks.OnMessage">
+            <summary>
+            Subscribe to this event if you want to receive and process KSL information messages.
+            </summary>
+        </member>
+        <member name="T:KSL.API.IInternalTypeParser">
+            <summary>
+            Internal interface for custom parsers. Implementation of this is not recommended if you don't know what you are doing. Use TypeParser generic class instead.
+            </summary>
+            <seealso cref="T:KSL.API.TypeParser`1"/>
+        </member>
+        <member name="P:KSL.API.IInternalTypeParser.Type">
+            <summary>
+            Target type
+            </summary>
+        </member>
+        <member name="M:KSL.API.IInternalTypeParser.ToRawString(System.Object)">
+            <summary>
+            Method to serialize value as raw string
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KSL.API.IInternalTypeParser.Parse(System.String)">
+            <summary>
+            Method to parse value from raw string
+            </summary>
+            <param name="rawData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:KSL.API.TypeParser`1">
+            <summary>
+            Base class for custom type parsers. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/config.md#custom-type-parser-example">KSL documentation</a>
+            </summary>
+            <typeparam name="T">Target type</typeparam>
+        </member>
+        <member name="P:KSL.API.TypeParser`1.Type">
+            <summary>
+            Getter for target type
+            </summary>
+        </member>
+        <member name="M:KSL.API.TypeParser`1.ToRawString(`0)">
+            <summary>
+            Method for converting custom type to a string. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/config.md#custom-type-parser-example">KSL documentation</a>
+            </summary>
+        </member>
+        <member name="M:KSL.API.TypeParser`1.Parse(System.String)">
+            <summary>
+            Method for parsing custom type from a string. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/config.md#custom-type-parser-example">KSL documentation</a>
+            </summary>
+        </member>
+        <member name="T:KSL.API.IConfig">
+            <summary>
+            Config interface needed for creating configs and registering custom type parsers for it.
+            As more simple way to store data you can check <see cref="T:KSL.API.IPrefsStorage"/>
+            For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/config.md">KSL documentation</a>
+            </summary>
+        </member>
+        <member name="M:KSL.API.IConfig.RegisterParser``1">
+            <summary>
+            Method allows you to register custom type parser with type of <see cref="T:KSL.API.IInternalTypeParser"/>. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/config.md#custom-type-parser-example">KSL documentation</a>
+            </summary>
+            <typeparam name="T">User defined custom parser.</typeparam>
+            <returns><see cref="T:KSL.API.IConfig"/></returns>
+            <exception cref="T:System.Exception">Can be thrown on type registration error</exception>
+        </member>
+        <member name="M:KSL.API.IConfig.RegisterConfig``1(System.String)">
+            <summary>
+            Method allows you to register a config interface. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/config.md#config-registration">KSL documentation</a>
+            </summary>
+            <param name="customName">Optional config name without extension. By default config name will be the same as the mod name, but if you want to create multiple configs it's necessary to specify custom name for each.</param>
+            <typeparam name="T">User config interface type.</typeparam>
+            <returns>An instance of user defined config</returns>
+            <exception cref="T:System.Exception">Can be thrown on config creation error</exception>
+        </member>
+        <member name="M:KSL.API.IConfig.Save``1">
+            <summary>
+            Mark user config for save (slightly delayed save)
+            </summary>
+            <typeparam name="T">User config interface type</typeparam>
+        </member>
+        <member name="M:KSL.API.IConfig.ForceSave``1">
+            <summary>
+            Force save user config without dalay
+            </summary>
+            <typeparam name="T">User config interface type</typeparam>
+        </member>
+        <member name="T:KSL.API.IInfo">
+            <summary>
+            Info interface allows you to get an info about current mod user and the application
+            </summary>
+        </member>
+        <member name="P:KSL.API.IInfo.SteamId">
+            <summary>
+            User's SteamID
+            </summary>
+        </member>
+        <member name="P:KSL.API.IInfo.AppId">
+            <summary>
+            Application ID that corresponds to application ID in Steam
+            </summary>
+        </member>
+        <member name="P:KSL.API.IInfo.AppName">
+            <summary>
+            Application name
+            </summary>
+        </member>
+        <member name="T:KSL.API.IPaths">
+            <summary>
+            Paths interface
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.GameRoot">
+            <summary>
+            Path to the game root folder, where the .exe is located
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Mods">
+            <summary>
+            Path to the KSL mods folder
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Extensions">
+            <summary>
+            Path to the KSL extensions folder
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Config">
+            <summary>
+            Path to the KSL config folder
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Cache">
+            <summary>
+            Path to the KSL cache folder
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Dev">
+            <summary>
+            Path to the KSL dev folder. Keep in mind that this folder will be created only if you have devtools enabled in the KSL settings.
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.LoaderRoot">
+            <summary>
+            Path to the KSL root folder
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Managed">
+            <summary>
+            Path to the game's Managed folder 
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.Executable">
+            <summary>
+            Path to the game's .exe file
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.ProcessName">
+            <summary>
+            Current game process name
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPaths.DllSearchPaths">
+            <summary>
+            Search paths for DLL's
+            </summary>
+        </member>
+        <member name="T:KSL.API.IPrefsStorage">
+            <summary>
+            Simple prefs storage interface. You can use it to save and load preferences for your mod / extension.
+            In case if you need more advanced storage system consider to use <see cref="T:KSL.API.IConfig"/>.
+            For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/prefs.md">KSL documentation</a>
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPrefsStorage.Get``1(System.String,``0)">
+            <summary>
+            Method will get value from prefs storage of the mod / extension.
+            List of supported types can be found in the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/prefs.md#supported-types">KSL documentation</a>
+            </summary>
+            <param name="key">Key name</param>
+            <param name="defaultValue">Default value that will be returned if there is no value with key stored.</param>
+            <typeparam name="T">Type of the value</typeparam>
+            <returns>T if the key is presented in storage or null if it's not</returns>
+        </member>
+        <member name="M:KSL.API.IPrefsStorage.TryGet``1(System.String,``0@,``0)">
+            <summary>
+            Method will try to get the value from the mod / extension storage.
+            List of supported types can be found in the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/prefs.md#supported-types">KSL documentation</a>
+            </summary>
+            <param name="key">Key name</param>
+            <param name="value">Return value</param>
+            <param name="defaultValue">Default value that will be returned if there is no value with key stored.</param>
+            <typeparam name="T">Type of the value</typeparam>
+            <returns>True if the key presented in storage or False if it's not</returns>
+        </member>
+        <member name="M:KSL.API.IPrefsStorage.Set``1(System.String,``0)">
+            <summary>
+            Method will save the value in the mod / extension prefs storage.
+            In case if the value with key was already presented method will override it.
+            List of supported types can be found in the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/prefs.md#supported-types">KSL documentation</a>
+            </summary>
+            <param name="key">Key name</param>
+            <param name="value">Value that should be saved</param>
+            <typeparam name="T">Type of the value</typeparam>
+            <returns>True if the value was saved without errors</returns>
+        </member>
+        <member name="T:KSL.API.Group">
+            <summary>
+            Element group enum
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.Single">
+            <summary>
+            Single element, with equal margins on each side
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.VFirst">
+            <summary>
+            First element in VERTICAL group
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.VMiddle">
+            <summary>
+            Middle element in VERTICAL group
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.VLast">
+            <summary>
+            Last element in VERTICAL group
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.HLeft">
+            <summary>
+            First element in HORIZONTAL group
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.HMiddle">
+            <summary>
+            Middle element in HORIZONTAL group
+            </summary>
+        </member>
+        <member name="F:KSL.API.Group.HRight">
+            <summary>
+            Last element in HORIZONTAL group
+            </summary>
+        </member>
+        <member name="T:KSL.API.Tooltip">
+            <summary>
+            Tooltip class. Can be created implicitly from a string
+            </summary>
+        </member>
+        <member name="P:KSL.API.Tooltip.AutoWidth">
+            <summary>
+            Getter for AutoWidth, used by KSL
+            </summary>
+        </member>
+        <member name="F:KSL.API.Tooltip.Text">
+            <summary>
+            Tooltip text
+            </summary>
+        </member>
+        <member name="F:KSL.API.Tooltip.SingleLine">
+            <summary>
+            Should tooltip be single lined
+            </summary>
+        </member>
+        <member name="F:KSL.API.Tooltip.CustomWidth">
+            <summary>
+            Allows you to explicitly specify tool tip width. It will be scaled depending on KSL UI.Scale 
+            </summary>
+        </member>
+        <member name="M:KSL.API.Tooltip.op_Implicit(System.String)~KSL.API.Tooltip">
+            <summary>
+            Implicit operator to create Tooltip from a string
+            </summary>
+            <param name="text">Tooltip text</param>
+            <returns>Tooltip object</returns>
+        </member>
+        <member name="T:KSL.API.IUIProvider">
+            <summary>
+            UI provider interface used by KSL. Do not implement it.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUIProvider.OnUIDraw">
+            <summary>
+            Draw all your UI in this method. It will be called if you select the mod / extension in the main menu.
+            You can draw UI using <see cref="T:KSL.API.IUI"/> or using default unity GUI or GUILayout.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUIProvider.OnAdditionalAboutUIDraw">
+            <summary>
+            Additional UI for the "About" context. It will be called if you navigate to "About" context of the mod / extension.
+            You can draw UI using <see cref="T:KSL.API.IUI"/> or using default unity GUI or GUILayout.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUIProvider.GetIcon">
+            <summary>
+            Override this method if you want to set custom icon for your mod / extension. See more <see cref="M:KSL.API.IUIProvider.GetIcon"/>
+            More info at <a href="https://github.com/trbflxr/ksl/blob/master/doc/guide/dev/mods.md#set-mod-icon">KSL documentation</a>
+            </summary>
+            <returns>Custom mod / extension icon</returns>
+        </member>
+        <member name="T:KSL.API.IUI">
+            <summary>
+            KSL UI interface. Use it to draw the UI with KSL styles.
+            </summary>
+        </member>
+        <member name="P:KSL.API.IUI.IsVisible">
+            <summary>
+            Getter for current KSL UI visible state.
+            </summary>
+        </member>
+        <member name="P:KSL.API.IUI.IsMouseOver">
+            <summary>
+            Getter for mouse over state. Return True is mouse over KSL UI.
+            </summary>
+        </member>
+        <member name="P:KSL.API.IUI.Scale">
+            <summary>
+            Current UI scale
+            </summary>
+        </member>
+        <member name="P:KSL.API.IUI.DefaultSkin">
+            <summary>
+            Default Unity UI skin
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.PushContext(System.Action,System.String)">
+            <summary>
+            Method allows you to push new context to the stack.
+            </summary>
+            <param name="contextUI">New context UI function</param>
+            <param name="contextName">The name of the context. Will be displayed in the KSL nav. bar</param>
+        </member>
+        <member name="M:KSL.API.IUI.PopContext">
+            <summary>
+            Method needed to pop context from the stack. If the stack is empty it will open KSL main menu
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.BeginHorizontal">
+            <summary>
+            Begin horizontal group. Same logic as GUILayout.BeginHorizontal
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.EndHorizontal">
+            <summary>
+            End horizontal group. Same logic as GUILayout.EndHorizontal
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.BeginVertical">
+            <summary>
+            Begin vertical group. Same logic as GUILayout.BeginVertical
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.EndVertical">
+            <summary>
+            End vertical group. Same logic as GUILayout.EndVertical
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.HorizontalLine">
+            <summary>
+            Draw a horizontal separator line
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.Spacer">
+            <summary>
+            Add spacer 
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUI.Label(System.String)">
+            <summary>
+            Draw a label
+            </summary>
+            <param name="text">Label text</param>
+        </member>
+        <member name="M:KSL.API.IUI.GroupLabel(System.String)">
+            <summary>
+            Draw a group label. With bigger left margin and without bottom margin
+            </summary>
+            <param name="text">Label text</param>
+        </member>
+        <member name="M:KSL.API.IUI.Hyperlink(System.String,System.String,KSL.API.Tooltip)">
+            <summary>
+            Draw a hyperlink to open URL
+            </summary>
+            <param name="text">Link text</param>
+            <param name="url">URL to open</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+        </member>
+        <member name="M:KSL.API.IUI.Hyperlink(System.String,System.Action,KSL.API.Tooltip)">
+            <summary>
+            Draw a hyperlink to call the callback
+            </summary>
+            <param name="text">Link text</param>
+            <param name="callback">Callback that will be called when clicking the link</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+        </member>
+        <member name="M:KSL.API.IUI.HyperlinkLabel(System.String,System.String,System.String,KSL.API.Tooltip)">
+            <summary>
+            Label with hyperlink to open URL. Insert <![CDATA[<link>]]> in the "format" to create hyperlink. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/ui.md#hyperlinklabel">KSL documentation</a>
+            </summary>
+            <param name="format">Format text should contain <![CDATA[<link>]]> in order to replace it with hyperlink</param>
+            <param name="linkText">Link text</param>
+            <param name="url">URL to open</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+        </member>
+        <member name="M:KSL.API.IUI.HyperlinkLabel(System.String,System.String,System.Action,KSL.API.Tooltip)">
+            <summary>
+            Label with hyperlink to call the callback. Insert <![CDATA[<link>]]> in the "format" to create hyperlink. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/ui.md#hyperlinklabel">KSL documentation</a>
+            </summary>
+            <param name="format">Format text should contain <![CDATA[<link>]]> in order to replace it with hyperlink</param>
+            <param name="linkText">Link text</param>
+            <param name="callback">Callback that will be called when clicking the link</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+        </member>
+        <member name="M:KSL.API.IUI.Button(System.String,KSL.API.Group,System.Boolean,KSL.API.Tooltip)">
+            <summary>
+            Text button
+            </summary>
+            <param name="text">Text</param>
+            <param name="group">Optional <see cref="T:KSL.API.Group"/> to define margins</param>
+            <param name="active">Pressed button flag. Set to True if you want the button to look pressed down</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+            <returns>True if the button is pressed</returns>
+        </member>
+        <member name="M:KSL.API.IUI.ContextButton(System.String,KSL.API.Group,KSL.API.Tooltip)">
+            <summary>
+            Context button with text aligned to the left side and an arrow at the right side
+            </summary>
+            <param name="text">Text</param>
+            <param name="group">Optional <see cref="T:KSL.API.Group"/> to define margins</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+            <returns>True if the button is pressed</returns>
+        </member>
+        <member name="M:KSL.API.IUI.Toggle(System.String,System.Boolean@,KSL.API.Group,KSL.API.Tooltip)">
+            <summary>
+            Toggle switch with a label and a small toggle button
+            </summary>
+            <param name="text">Text</param>
+            <param name="active">Ref to bool activity flag</param>
+            <param name="group">Optional <see cref="T:KSL.API.Group"/> to define margins</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+            <returns>True if the element was toggled</returns>
+        </member>
+        <member name="M:KSL.API.IUI.Slider(System.Single@,System.Single,System.Single,System.String,KSL.API.Group,KSL.API.Tooltip)">
+            <summary>
+            Simple horizontal slider
+            </summary>
+            <param name="value">Ref to a float value of a slider</param>
+            <param name="min">Min value</param>
+            <param name="max">Max value</param>
+            <param name="text">Display text</param>
+            <param name="group">Optional <see cref="T:KSL.API.Group"/> to define margins</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+            <returns>True if the value has changed</returns>
+        </member>
+        <member name="M:KSL.API.IUI.SliderWithButtons(System.Single@,System.Single,System.Single,System.Single,System.String,KSL.API.Group,KSL.API.Tooltip)">
+            <summary>
+            Slider with buttons and value step
+            </summary>
+            <param name="value">Ref to a float value of a slider</param>
+            <param name="min">Min value</param>
+            <param name="max">Max value</param>
+            <param name="step">Step that will be added or subtracted by clicking the buttons and dragging the slider</param>
+            <param name="text">Display text</param>
+            <param name="group">Optional <see cref="T:KSL.API.Group"/> to define margins</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+            <returns>True if the value has changed</returns>
+        </member>
+        <member name="M:KSL.API.IUI.Input(System.String@,System.Int32,System.String,KSL.API.Group,KSL.API.Tooltip)">
+            <summary>
+            Input text field
+            </summary>
+            <param name="value">Ref string value</param>
+            <param name="maxLength">Max value length, -1 = unlimited</param>
+            <param name="regex">Optional regex</param>
+            <param name="group">Optional <see cref="T:KSL.API.Group"/> to define margins</param>
+            <param name="tooltip">Optional <see cref="T:KSL.API.Tooltip"/></param>
+            <returns>True if the value has changed</returns>
+        </member>
+        <member name="M:KSL.API.IUI.ListView``1(UnityEngine.Vector2@,System.Single,System.Collections.Generic.IEnumerable{``0},System.Action{System.Int32,``0})">
+            <summary>
+            List view component. Allows you to draw a list of items and call draw callback for each item
+            </summary>
+            <param name="scrollPos">Vector2 ref to a current scroll position</param>
+            <param name="visibleHeight">Visible list height. It will be scaled depending on KSL UI.Scale</param>
+            <param name="items">The list of items to display</param>
+            <param name="drawCallback">Item draw callback it will be called for each item. Here you can specify how to draw the item. For more information, see the <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/ui.md#listview">KSL documentation</a></param>
+            <typeparam name="T">Item type in the list</typeparam>
+        </member>
+        <member name="T:KSL.API.ActionType">
+            <summary>
+            Input action type
+            </summary>
+        </member>
+        <member name="F:KSL.API.ActionType.Pressed">
+            <summary>
+            Key pressed
+            </summary>
+        </member>
+        <member name="F:KSL.API.ActionType.Released">
+            <summary>
+            Key released
+            </summary>
+        </member>
+        <member name="F:KSL.API.ActionType.Hold">
+            <summary>
+            Hey hold
+            </summary>
+        </member>
+        <member name="T:KSL.API.IInput">
+            <summary>
+            Input interface used to bind keys to actions
+            </summary>
+        </member>
+        <member name="M:KSL.API.IInput.Bind(UnityEngine.KeyCode[],System.Action,System.String,KSL.API.ActionType)">
+            <summary>
+            Method allows you to bind an action to a key combination. Combination can be changed from the KSL Keybinds menu
+            </summary>
+            <param name="keys">Default or "initial" key combination. An array of keys, max length = 4</param>
+            <param name="action">An action that will be called</param>
+            <param name="displayName">How the action name will be displayed in the KSL menu</param>
+            <param name="actionType">Action type <see cref="T:KSL.API.ActionType"/></param>
+        </member>
+        <member name="M:KSL.API.IInput.Bind(UnityEngine.KeyCode,System.Action,System.String,KSL.API.ActionType)">
+            <summary>
+            Method allows you to bind an action to a single key. This key can be changed from the KSL Keybinds menu
+            </summary>
+            <param name="key">Default or "initial" key</param>
+            <param name="action">An action that will be called</param>
+            <param name="displayName">How the action name will be displayed in the KSL menu</param>
+            <param name="actionType">Action type <see cref="T:KSL.API.ActionType"/></param>
+        </member>
+        <member name="M:KSL.API.IInput.SetSuppressInput(System.Boolean)">
+            <summary>
+            Method allows you to suppress KSL input. Call with True if you want to suppress all KSL input
+            </summary>
+            <param name="suppress">Suppress KSL input</param>
+        </member>
+        <member name="T:KSL.API.ModType">
+            <summary>
+            Mod type
+            </summary>
+        </member>
+        <member name="F:KSL.API.ModType.Unknown">
+            <summary>
+            Unknown mod type
+            </summary>
+        </member>
+        <member name="F:KSL.API.ModType.KSLMod">
+            <summary>
+            KSL mod
+            </summary>
+        </member>
+        <member name="F:KSL.API.ModType.KSLExtension">
+            <summary>
+            KSL extension
+            </summary>
+        </member>
+        <member name="F:KSL.API.ModType.KN">
+            <summary>
+            Legacy Kino mod (targeting legacy Kino.API)
+            </summary>
+        </member>
+        <member name="F:KSL.API.ModType.BIE">
+            <summary>
+            Legacy BepInEx mod
+            </summary>
+        </member>
+        <member name="T:KSL.API.KSLModMeta">
+            <summary>
+            Mod / extension public metadata
+            </summary>
+        </member>
+        <member name="F:KSL.API.KSLModMeta.Id">
+            <summary>
+            Mod / extension ID
+            </summary>
+        </member>
+        <member name="F:KSL.API.KSLModMeta.Type">
+            <summary>
+            Mod / extension type
+            </summary>
+        </member>
+        <member name="F:KSL.API.KSLModMeta.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="F:KSL.API.KSLModMeta.Author">
+            <summary>
+            Author
+            </summary>
+        </member>
+        <member name="F:KSL.API.KSLModMeta.Version">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="T:KSL.API.ILoader">
+            <summary>
+            Loader interface used for interaction with KSL loader
+            </summary>
+        </member>
+        <member name="P:KSL.API.ILoader.Name">
+            <summary>
+            Getter for KSL loader name in format: "KSL v*.*.*"
+            </summary>	
+        </member>
+        <member name="M:KSL.API.ILoader.RequestUnloadSelf">
+            <summary>
+            This method allows you to unload the mod that called this function
+            </summary>
+        </member>
+        <member name="M:KSL.API.ILoader.IsModLoadedWithName(System.String)">
+            <summary>
+            Method allows you to check if the mod or extension with the provided name is loaded
+            </summary>
+            <param name="modName">Mod / extension name</param>
+            <returns>True if the mod / extension is loaded</returns>
+        </member>
+        <member name="M:KSL.API.ILoader.IsModLoadedWithGuid(System.String)">
+            <summary>
+            Method allows you to check if the mod or extension with the provided GUID is loaded
+            </summary>
+            <param name="modGuid">Mod / extension GUID</param>
+            <returns>True if the mod / extension is loaded</returns>
+        </member>
+        <member name="M:KSL.API.ILoader.GetLoadedMods">
+            <summary>
+            Method returns the list of the loaded mods  
+            </summary>
+            <returns>List of the loaded mods</returns>
+        </member>
+        <member name="T:KSL.API.ILogger">
+            <summary>
+            Logger interface used to write logs to dev console and files with KSL message format
+            </summary>
+        </member>
+        <member name="M:KSL.API.ILogger.Fatal(System.Object)">
+            <summary>
+            Log message with "Fatal" flag
+            </summary>
+            <param name="data">Message data</param>
+        </member>
+        <member name="M:KSL.API.ILogger.Error(System.Object)">
+            <summary>
+            Log message with "Error" flag
+            </summary>
+            <param name="data">Message data</param>
+        </member>
+        <member name="M:KSL.API.ILogger.Warning(System.Object)">
+            <summary>
+            Log message with "Warning" flag
+            </summary>
+            <param name="data">Message data</param>
+        </member>
+        <member name="M:KSL.API.ILogger.Info(System.Object)">
+            <summary>
+            Log message with "Info" flag
+            </summary>
+            <param name="data">Message data</param>
+        </member>
+        <member name="T:KSL.API.IUtils">
+            <summary>
+            Utility interface
+            </summary>
+        </member>
+        <member name="M:KSL.API.IUtils.LoadEmbeddedTexture(System.Reflection.Assembly,System.String)">
+            <summary>
+            Allows you to load an embedded image (.jpg / .png) from C# lib resources, <a href="https://github.com/trbflxr/ksl/blob/master/doc/api/utils.md#loadembeddedtexture">example usage</a>
+            </summary>
+            <param name="assembly">Current executing assembly</param>
+            <param name="path">Path to resource including the root namespace of the lib</param>
+            <returns>Texture2D</returns>
+        </member>
+        <member name="M:KSL.API.IUtils.OpenFilePicker(System.String,System.String,System.Action{System.String},System.String[])">
+            <summary>
+            Allows you to open filepicker context to list files in <paramref name="pickInFolder"/> with optional filter by file extension
+            </summary>
+            <param name="title">Title of the file picker context</param>
+            <param name="pickInFolder">Folder where files should be searched</param>
+            <param name="onFileSelected">This callback will be called on file selection</param>
+            <param name="allowedExtensions">Optional file extension filter</param>
+        </member>
+        <member name="T:KSL.API.Kino">
+            <summary>
+            Main KSL API class. This is a container for all common KSL interfaces.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Log">
+            <summary>
+            Logger interface. Log messages will be formatted as "[LogLevel :  ModName] log text".
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Loader">
+            <summary>
+            Loader interface used to get active mods and extensions list.
+            Also used to check if the mod or extension is loaded by name or GUID and to unload the mod if needed.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Prefs">
+            <summary>
+            An interface for simple prefs storage. Way more easier in use then <see cref="P:KSL.API.Kino.Config"/> but its functional is more limited.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Config">
+            <summary>
+            An interface for creating configs for the mod or extension. More advance alternative for <see cref="P:KSL.API.Kino.Prefs"/>.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Input">
+            <summary>
+            Input manager interface. Needed to bind mod hotkeys and suppress KSL input if needed.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.UI">
+            <summary>
+            KSL UI interface. By using it you can create UI with the same style as KSL
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Paths">
+            <summary>
+            Paths interface allows you to access paths to game root, mods folder, etc.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Utils">
+            <summary>
+            Utility interface.
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Callbacks">
+            <summary>
+            Callbacks interface allows you to subscribe to KSL loader callbacks 
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Info">
+            <summary>
+            User and application info
+            </summary>
+        </member>
+        <member name="T:KSL.API.KSLMeta">
+            <summary>
+            Attribute needed to define KSL metadata. Required for KSL mods and extensions
+            </summary>
+        </member>
+        <member name="P:KSL.API.KSLMeta.Name">
+            <summary>
+            Mod or extension name
+            </summary>
+        </member>
+        <member name="P:KSL.API.KSLMeta.Version">
+            <summary>
+            Mod or extension version
+            </summary>
+        </member>
+        <member name="P:KSL.API.KSLMeta.Author">
+            <summary>
+            Author, team name, etc.
+            </summary>
+        </member>
+        <member name="P:KSL.API.KSLMeta.Guid">
+            <summary>
+            Getter for mod / extension Guid. It's generated from Author and Name properties
+            </summary>
+        </member>
+        <member name="M:KSL.API.KSLMeta.#ctor(System.String,System.String,System.String)">
+            <summary>
+            KSL Metadata constructor
+            </summary>
+            <param name="name">Mod / extension name</param>
+            <param name="version">Version</param>
+            <param name="author">Author</param>
+        </member>
+    </members>
+</doc>

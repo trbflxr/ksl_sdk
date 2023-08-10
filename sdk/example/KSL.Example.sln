@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleMod", "ExampleMod\ExampleMod.csproj", "{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleExtension", "ExampleExtension\ExampleExtension.csproj", "{847254DF-618B-4FC3-B66D-09A0F3505E90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Release_Encrypted|Any CPU = Release_Encrypted|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}.Release_Encrypted|Any CPU.ActiveCfg = Release_Encrypted|Any CPU
+		{5F2D7A58-8158-49C1-9604-BD2E714BEF2B}.Release_Encrypted|Any CPU.Build.0 = Release_Encrypted|Any CPU
+		{847254DF-618B-4FC3-B66D-09A0F3505E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{847254DF-618B-4FC3-B66D-09A0F3505E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{847254DF-618B-4FC3-B66D-09A0F3505E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{847254DF-618B-4FC3-B66D-09A0F3505E90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{847254DF-618B-4FC3-B66D-09A0F3505E90}.Release_Encrypted|Any CPU.ActiveCfg = Release_Encrypted|Any CPU
+		{847254DF-618B-4FC3-B66D-09A0F3505E90}.Release_Encrypted|Any CPU.Build.0 = Release_Encrypted|Any CPU
+	EndGlobalSection
+EndGlobal
