@@ -456,6 +456,14 @@
             <param name="contextUI">New context UI function</param>
             <param name="contextName">The name of the context. Will be displayed in the KSL nav. bar</param>
         </member>
+        <member name="M:KSL.API.IUI.PushContext(System.Action,System.Action,System.String)">
+            <summary>
+            Method allows you to push new context to the stack and set OnPop event for it.
+            </summary>
+            <param name="contextUI">New context UI function</param>
+            <param name="onPop">On pop callback</param>
+            <param name="contextName">The name of the context. Will be displayed in the KSL nav. bar</param>
+        </member>
         <member name="M:KSL.API.IUI.PopContext">
             <summary>
             Method needed to pop context from the stack. If the stack is empty it will open KSL main menu
