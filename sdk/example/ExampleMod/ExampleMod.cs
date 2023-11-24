@@ -3,11 +3,11 @@ using KSL.API;
 using UnityEngine;
 
 namespace Example {
-	// This is non-existent github link so auto updater will not work
 	[KSLMeta("ExampleMod", "1.0.0", "trbflxr")]
 	public class ExampleMod : BaseMod {
 		private readonly UIExample uiExample_ = new();
 		private readonly PrefsStorageExample prefsExample_ = new();
+		private readonly Synchronization syncExample_ = new();
 
 		private void Start() {
 			Kino.Log.Info("ExampleMod started!");
@@ -20,6 +20,8 @@ namespace Example {
 			Kino.Log.Info($"Config initialization result: {cfgRes}");
 
 			RegisterHotkeys();
+
+			syncExample_.OnInit();
 		}
 
 		public override void OnUIDraw() {
@@ -28,6 +30,10 @@ namespace Example {
 			Kino.UI.HorizontalLine();
 
 			prefsExample_.Draw();
+
+			Kino.UI.HorizontalLine();
+
+			syncExample_.Draw();
 		}
 
 		public override void OnAdditionalAboutUIDraw() {
@@ -45,6 +51,7 @@ namespace Example {
 		private void RegisterHotkeys() {
 			Kino.Input.Bind(new[] { KeyCode.LeftControl, KeyCode.H }, PrintHello, "Hello action");
 			Kino.Input.Bind(KeyCode.J, ContinuousAction, "Continuous action", ActionType.Hold);
+			Kino.Input.Bind(KeyCode.K, syncExample_.TestSendToAll, "Test packet send");
 		}
 
 		private void PrintHello() {

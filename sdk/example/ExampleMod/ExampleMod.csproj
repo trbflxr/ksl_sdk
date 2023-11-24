@@ -66,6 +66,7 @@
 		<Compile Include="PrefsWrapperAdvanced.cs" />
 		<Compile Include="PrefsWrapperSimple.cs" />
 		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="Synchronization.cs" />
 		<Compile Include="UIExample.cs" />
 		<Compile Include="PrefsStorageExample.cs" />
 	</ItemGroup>
