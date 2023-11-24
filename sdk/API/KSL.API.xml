@@ -328,6 +328,207 @@
             <typeparam name="T">Type of the value</typeparam>
             <returns>True if the value was saved without errors</returns>
         </member>
+        <member name="T:KSL.API.IPacket">
+            <summary>
+            KSL synchronization data packet. Works on the principle of a BinaryWriter / BinaryReader
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPacket.Id">
+            <summary>
+            Packet ID getter.
+            </summary>
+        </member>
+        <member name="P:KSL.API.IPacket.Data">
+            <summary>
+            Packet buffer getter.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteByte(System.Byte)">
+            <summary>
+            Allows you to write byte array to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteBytes(System.Byte[])">
+            <summary>
+            Allows you to single byte to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteBool(System.Boolean)">
+            <summary>
+            Allows you to bool value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteInt32(System.Int32)">
+            <summary>
+            Allows you to int32 value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteUInt32(System.UInt32)">
+            <summary>
+            Allows you to uint32 value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteInt64(System.Int64)">
+            <summary>
+            Allows you to int64 (long) value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteUInt64(System.UInt64)">
+            <summary>
+            Allows you to uint64 (ulong) value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteFloat(System.Single)">
+            <summary>
+            Allows you to float value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteDouble(System.Double)">
+            <summary>
+            Allows you to double value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.WriteString(System.String)">
+            <summary>
+            Allows you to string value to buffer.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadByte">
+            <summary>
+            Allows you to read byte value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadBytes(System.Int32)">
+            <summary>
+            Allows you to read byte array value from a buffer and moves position pointer by its size.
+            <param name="count">Bytes count</param>
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadBool">
+            <summary>
+            Allows you to read bool value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadInt32">
+            <summary>
+            Allows you to read int32 value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadUInt32">
+            <summary>
+            Allows you to read uint32 value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadInt64">
+            <summary>
+            Allows you to read int64 (long) value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadUInt64">
+            <summary>
+            Allows you to read uint64 (ulong) value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadFloat">
+            <summary>
+            Allows you to read float value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadDouble">
+            <summary>
+            Allows you to read double value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="M:KSL.API.IPacket.ReadString">
+            <summary>
+            Allows you to read string value from a buffer and moves position pointer by its size.
+            </summary>
+        </member>
+        <member name="T:KSL.API.ISyncProvider">
+            <summary>
+            Synchronization provider interface. You can only implement it for extensions.
+            Needed to provide synchronization for KSL mods in multiplayer games.
+            </summary>
+        </member>
+        <member name="M:KSL.API.ISyncProvider.TrySendToAll(KSL.API.IPacket)">
+            <summary>
+            Try send <see cref="T:KSL.API.IPacket"/> to all clients
+            </summary>
+            <param name="packet"><see cref="T:KSL.API.IPacket"/></param>
+            <returns>True if packet was sent successfully</returns>
+        </member>
+        <member name="M:KSL.API.ISyncProvider.TrySendTo(KSL.API.IPacket,System.UInt64)">
+            <summary>
+            Try send <see cref="T:KSL.API.IPacket"/> to specified client ID
+            </summary>
+            <param name="packet"><see cref="T:KSL.API.IPacket"/></param>
+            <param name="receiverId">Receiver ID</param>
+            <returns>True if packet was sent successfully</returns>
+        </member>
+        <member name="M:KSL.API.ISyncProvider.SetPacketCallback(System.Action{System.Int32,System.Byte[]})">
+            <summary>
+            This method will be called by KSL to set packet receive callback
+            </summary>
+            <param name="onPacketReceived">Callback that will be called when any packet is received</param>
+        </member>
+        <member name="T:KSL.API.ISync">
+            <summary>
+            An interface that allows you to add synchronization for your mods and extensions.
+            Provided that there are extensions for the game that provide a synchronization interface
+            </summary>
+        </member>
+        <member name="P:KSL.API.ISync.IsAvailable">
+            <summary>
+            Synchronization availability interface
+            </summary>
+        </member>
+        <member name="M:KSL.API.ISync.TryRegisterPacket(System.String,System.Int32@)">
+            <summary>
+            Try register new packet for current mod / extension
+            </summary>
+            <param name="packetName">Packet name, have to be unique for current mod / extension</param>
+            <param name="packetId">Out packet ID</param>
+            <returns>True if the packet was registered successfully</returns>
+        </member>
+        <member name="M:KSL.API.ISync.SetCallback(System.Int32,System.Action{KSL.API.IPacket})">
+            <summary>
+            Set callback for selected packet ID
+            </summary>
+            <param name="packetId">Packet ID</param>
+            <param name="onPacketReceived">An action that will be called</param>
+            <returns>True if the action was registered successfully</returns>
+        </member>
+        <member name="M:KSL.API.ISync.CreatePacket(System.Int32)">
+            <summary>
+            Creates a IPacket instance with provided ID
+            </summary>
+            <param name="packetId">Packet ID</param>
+            <returns>IPacket instance</returns>
+        </member>
+        <member name="M:KSL.API.ISync.CreatePacket(System.Int32,System.Byte[])">
+            <summary>
+            Creates a IPacket instance with provided ID and data buffer.
+            Use it if you already have a byte array that you want to send.
+            </summary>
+            <param name="packetId">Packet ID</param>
+            <param name="data">Packet data</param>
+            <returns>IPacket instance with pre-filled data buffer</returns>
+        </member>
+        <member name="M:KSL.API.ISync.SendToAll(KSL.API.IPacket)">
+            <summary>
+            Allows you to send a packet to all clients
+            </summary>
+            <param name="packet">An instance of IPacket</param>
+            <returns>True if the packet was sent successfully</returns>
+        </member>
+        <member name="M:KSL.API.ISync.SendTo(KSL.API.IPacket,System.UInt64)">
+            <summary>
+            Allows you to send a packet to specific client
+            </summary>
+            <param name="packet">An instance of IPacket</param>
+            <param name="receiverId">Client ID</param>
+            <returns>True if the packet was sent successfully</returns>
+        </member>
         <member name="T:KSL.API.Group">
             <summary>
             Element group enum
@@ -869,6 +1070,11 @@
         <member name="P:KSL.API.Kino.Info">
             <summary>
             User and application info
+            </summary>
+        </member>
+        <member name="P:KSL.API.Kino.Sync">
+            <summary>
+            Data synchronization interface
             </summary>
         </member>
         <member name="T:KSL.API.KSLMeta">
