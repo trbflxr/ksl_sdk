@@ -127,6 +127,11 @@
             Subscribe to this event if you want to receive and process KSL information messages.
             </summary>
         </member>
+        <member name="E:KSL.API.ICallbacks.OnUIToggle">
+            <summary>
+            Subscribe to this event if you want to receive KSL UI toggle message.
+            </summary>
+        </member>
         <member name="T:KSL.API.IInternalTypeParser">
             <summary>
             Internal interface for custom parsers. Implementation of this is not recommended if you don't know what you are doing. Use TypeParser generic class instead.
@@ -900,6 +905,11 @@
             Legacy BepInEx mod
             </summary>
         </member>
+        <member name="F:KSL.API.ModType.UnknownMod">
+            <summary>
+            Legacy unknown mod
+            </summary>
+        </member>
         <member name="T:KSL.API.KSLModMeta">
             <summary>
             Mod / extension public metadata
@@ -944,6 +954,18 @@
             <summary>
             This method allows you to unload the mod that called this function
             </summary>
+        </member>
+        <member name="M:KSL.API.ILoader.IsProtectedModeActive">
+            <summary>
+            Method allows you to check if KSL protected mode is active
+            </summary>
+            <returns>True if KSL is started in protected mode</returns>
+        </member>
+        <member name="M:KSL.API.ILoader.IsAllModsVerified">
+            <summary>
+            Method allows you to check if all installed mods and extensions are verified
+            </summary>
+            <returns>True if all the mods are verified</returns>
         </member>
         <member name="M:KSL.API.ILoader.IsModLoadedWithName(System.String)">
             <summary>
