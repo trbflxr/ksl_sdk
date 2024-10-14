@@ -869,6 +869,26 @@
             <param name="displayName">How the action name will be displayed in the KSL menu</param>
             <param name="actionType">Action type <see cref="T:KSL.API.ActionType"/></param>
         </member>
+        <member name="M:KSL.API.IInput.Bind(UnityEngine.KeyCode,System.String,System.Action,System.Action,System.Action)">
+            <summary>
+            Method allows you to bind an action to a single key. This key can be changed from the KSL Keybinds menu
+            </summary>
+            <param name="key">Default or "initial" key</param>
+            <param name="displayName">How the action name will be displayed in the KSL menu</param>
+            <param name="actionPressed">Pressed action</param>
+            <param name="actionReleased">Released action</param>
+            <param name="actionHold">Hold action</param>
+        </member>
+        <member name="M:KSL.API.IInput.Bind(UnityEngine.KeyCode[],System.String,System.Action,System.Action,System.Action)">
+            <summary>
+            Method allows you to bind an action to a single key. This key can be changed from the KSL Keybinds menu
+            </summary>
+            <param name="keys">Default or "initial" key combination. An array of keys, max length = 4</param>
+            <param name="displayName">How the action name will be displayed in the KSL menu</param>
+            <param name="actionPressed">Pressed action</param>
+            <param name="actionReleased">Released action</param>
+            <param name="actionHold">Hold action</param>
+        </member>
         <member name="M:KSL.API.IInput.SetSuppressInput(System.Boolean)">
             <summary>
             Method allows you to suppress KSL input. Call with True if you want to suppress all KSL input
